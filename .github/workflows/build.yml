@@ -29,3 +29,11 @@ jobs:
           gcc --version
           g++ --version
           cmake --version
+      - name: build llvm
+        run: |
+          git clone https://github.com/llvm/llvm-project.git;
+          cd llvm-project && mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PROJECTS="clang" -G "Unix Makefiles" ../llvm
+          make -j
+
+
