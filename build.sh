@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scl enable devtoolset-11 bash
+source /opt/rh/devtoolset-11/enable
 gcc --version
 g++ --version
 cmake --version
