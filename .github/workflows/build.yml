@@ -31,6 +31,6 @@ jobs:
           
       - name: check dependencies
         run: |
-          ./build.sh
+          bash build.sh
 
 
