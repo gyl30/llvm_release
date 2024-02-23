@@ -31,9 +31,13 @@ jobs:
           cmake --version
       - name: build llvm
         run: |
+          yum install -y centos-release-scl
+          yum install -y devtoolset-11
+          scl enable devtoolset-11 bash
+          yum install -y gcc gcc-c++
           git clone https://github.com/llvm/llvm-project.git;
           cd llvm-project && mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PROJECTS="clang" -G "Unix Makefiles" ../llvm
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/llvm -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -G "Unix Makefiles" ../llvm
           make -j
 
 
