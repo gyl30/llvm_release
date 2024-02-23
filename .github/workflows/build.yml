@@ -1,0 +1,31 @@
+name: LLVM release build
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: "centos:7" 
+    steps:
+      - uses: actions/checkout@v3
+      - name: install dependencies
+        run: |
+          yum update
+          yum install -y git perl-IPC-Cmd perl-Test-Simple xz-devel xz-libs wget git gcc gcc-c++ autoconf automake libtool make pkgconfig which flex bison python3 python3-pip
+          pip3 install meson ninja pyelftools
+          export PIP_ONLY_BINARY=cmake
+          pip3 install meson ninja pyelftools cmake
+          unset PIP_ONLY_BINARY
+          gcc --version
+          g++ --version
+          cmake --version
+          
+      - name: check dependencies
+        run: |
+          gcc --version
+          g++ --version
+          cmake --version
