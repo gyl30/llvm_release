@@ -27,7 +27,10 @@ jobs:
           
           yum install -y centos-release-scl
           yum install -y devtoolset-11
-          scl enable devtoolset-11 bash
+          source /opt/rh/devtoolset-11/enable
+          gcc --version
+          g++ --version
+          cmake --version
           
       - name: check dependencies
         run: |
